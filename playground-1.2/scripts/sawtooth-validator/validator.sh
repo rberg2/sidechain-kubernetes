@@ -24,15 +24,15 @@ if [ ! -e "$SAWTOOTH_HOME/etc" ]; then
     mkdir -p $SAWTOOTH_HOME/etc
 fi
 
-if [ ! -e "$SAWTOOTH_HOME/etc/validator.toml" ]; then
-    echo "[CREATING] Creating the validator.toml file"
-    touch $SAWTOOTH_HOME/etc/validator.toml
-    echo "opentsdb_url = \"${OPENTSDB_URL}\"" >> $SAWTOOTH_HOME/etc/validator.toml
-    echo "opentsdb_db = \"${OPENTSDB_DB}\"" >> $SAWTOOTH_HOME/etc/validator.toml
-    echo "opentsdb_username = \"${OPENTSDB_USERNAME}\"" >> $SAWTOOTH_HOME/etc/validator.toml
-    echo "opentsdb_password = \"${OPENTSDB_PW}\"" >> $SAWTOOTH_HOME/etc/validator.toml
-    cat $SAWTOOTH_HOME/etc/validator.toml
-fi
+#if [ ! -e "$SAWTOOTH_HOME/etc/validator.toml" ]; then
+#    echo "[CREATING] Creating the validator.toml file"
+#    touch $SAWTOOTH_HOME/etc/validator.toml
+#    echo "opentsdb_url = \"${OPENTSDB_URL}\"" >> $SAWTOOTH_HOME/etc/validator.toml
+#    echo "opentsdb_db = \"${OPENTSDB_DB}\"" >> $SAWTOOTH_HOME/etc/validator.toml
+#    echo "opentsdb_username = \"${OPENTSDB_USERNAME}\"" >> $SAWTOOTH_HOME/etc/validator.toml
+#    echo "opentsdb_password = \"${OPENTSDB_PW}\"" >> $SAWTOOTH_HOME/etc/validator.toml
+#    cat $SAWTOOTH_HOME/etc/validator.toml
+#fi
 
 
 if [ ! -e "$SAWTOOTH_HOME/logs/validator-debug.log" ]; then
@@ -130,10 +130,8 @@ handlers = [ "debug"]
 EOF
 
 sawtooth-validator  \
-    --endpoint tcp://validator.sidechain.propsproject.io:8800 \
+    --endpoint tcp://sawtooth-validator:8800 \
     --bind component:tcp://eth0:4004 \
     --bind network:tcp://eth0:8800 \
     --bind consensus:tcp://eth0:5050 \
-    --scheduler parallel \
-    --opentsdb-url http://sawtooth-metrics:8086 \
-    --opentsdb-db metrics
+    --scheduler parallel
