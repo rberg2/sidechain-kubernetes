@@ -134,4 +134,5 @@ sawtooth-validator  \
     --bind component:tcp://eth0:4004 \
     --bind network:tcp://eth0:8800 \
     --bind consensus:tcp://eth0:5050 \
+    --peering static \
     --scheduler parallel
